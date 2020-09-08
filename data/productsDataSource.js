@@ -1,15 +1,13 @@
 const ProductApi = {
-    baseUrl: async function getItems(param) {
-        linkToSpecificProduct = 'http://localhost:3000/api/'+ param
-        console.log(linkToSpecificProduct)
-        return await linkToSpecificProduct
+    baseUrl: function (param) {
+        return 'http://localhost:3000/api/'+ param
     },
 
-    getProducts: async function () {
+    getProducts: async function (url) {
         /*const products = await fetch(ProductApi.baseUrl)*/
         // fetch une vrai api
 
-        return await fetch(ProductApi.baseUrl)
+        return await fetch(url)
         .then(function (response) {
             if (!response.ok) {
               throw new Error('HTTP error, status = ' + response.status);

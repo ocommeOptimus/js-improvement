@@ -1,13 +1,10 @@
 const Dom = {
-    teddiesList: document.getElementById('teddies'),
+    productsList: document.getElementById('products-list'),
     product: document.getElementById('template-product'),
 
-    buildTeddiesItems: async function () {
-        console.log('loading ...')
-        const products = await ProductApi.getProducts()
-        let id
-        console.log(products)
-
+    buildProducts: async function (productType) {
+        const url = ProductApi.baseUrl(productType)
+        const products = await ProductApi.getProducts(url)
         products.forEach((p, i) => {
             const template = document.importNode(Dom.product.content, true)
             const item = template.getElementById('product')
@@ -15,8 +12,13 @@ const Dom = {
             id.innerHTML = p._id
             item.setAttribute('data-product-id', i)
             item.addEventListener('click', Dom.showProductPage)
-            Dom.teddiesList.appendChild(template)
-        })
+            Dom.productsList.appendChild(template)
+        }) 
+    },
+    buildTeddiesItems: async function () {
+        console.log('loading ...')
+        let id
+
         console.log(products)
     },
 
@@ -25,7 +27,4 @@ const Dom = {
         console.log(`je suis clické depuis le produit numéro ${productId}`)
     }
 }
-if (window.getItems = ProductApi.baseUrl) {
-    ProductApi.getProducts
-    Dom.buildTeddiesItems
-}
+window.getItems = Dom.buildProducts
