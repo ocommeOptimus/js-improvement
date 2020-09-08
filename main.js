@@ -25,4 +25,7 @@ const Dom = {
         console.log(`je suis clické depuis le produit numéro ${productId}`)
     }
 }
-window.onload = Dom.buildTeddiesItems()
+if (window.getItems = ProductApi.baseUrl) {
+    ProductApi.getProducts
+    Dom.buildTeddiesItems
+}

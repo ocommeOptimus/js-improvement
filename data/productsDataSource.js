@@ -1,5 +1,9 @@
 const ProductApi = {
-    baseUrl: 'http://localhost:3000/api/teddies',
+    baseUrl: async function getItems(param) {
+        linkToSpecificProduct = 'http://localhost:3000/api/'+ param
+        console.log(linkToSpecificProduct)
+        return await linkToSpecificProduct
+    },
 
     getProducts: async function () {
         /*const products = await fetch(ProductApi.baseUrl)*/
