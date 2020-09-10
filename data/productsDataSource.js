@@ -1,7 +1,13 @@
 const ProductApi = {
     baseUrl: function (param) {
         return 'http://localhost:3000/api/'+ param
+        
     },
+    // idUrl: function (urlStr) {
+    //     let queryStr = window.location.search
+    //     let urlStr = new URLSearchParams(queryStr)
+    //     return 'http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id")
+    // },
 
     getProducts: async function (url) {
         /*const products = await fetch(ProductApi.baseUrl)*/
@@ -23,9 +29,11 @@ const ProductApi = {
         })
     },
 
-    getProduct: function (id) {
-        console.log('Get a single product')
-    },
+    // getOneProduct: async function () {
+    //     let queryStr = window.location.search;
+    //     let urlStr = new URLSearchParams(queryStr);
+    //     console.log('Get a single product')
+    // },
 
     createOrder: function () {
         console.log('Create an order')
