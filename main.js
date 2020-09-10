@@ -1,29 +1,51 @@
 const Dom = {
-    teddiesList: document.getElementById('teddies'),
+    productsList: document.getElementById('products-list'),
     product: document.getElementById('template-product'),
 
-    buildTeddiesItems: async function () {
-        console.log('loading ...')
-        const products = await ProductApi.getProducts()
-        let id
-        console.log(products)
-        console.log('vermine')
+    buildProducts: async function (productType) {
+        const url = ProductApi.baseUrl(productType)
+        const products = await ProductApi.getProducts(url)
 
         products.forEach((p, i) => {
-            const template = document.importNode(Dom.product.content, true)
-            const item = template.getElementById('product')
-            id = template.getElementById(('title'))
-            id.innerHTML = p._id
-            item.setAttribute('data-product-id', i)
-            item.addEventListener('click', Dom.showProductPage)
-            Dom.teddiesList.appendChild(template)
+        const template = document.importNode(Dom.product.content, true)
+        const item = template.getElementById('product')
+        id = template.getElementById(('title'))
+        id.innerHTML = p._id
+        link = template.getElementById(('link'))
+        link.href = 'assets/pages/products.html?type=' + productType + '&id=' + p._id
+        item.setAttribute('data-product-id', i)
+        item.addEventListener('click', Dom.showProductPage)
+        Dom.productsList.appendChild(template)
         })
-        console.log(products)
+    },
+    refreshProductsList: function () {
+        document.getElementById('products-list').innerHTML = " "
     },
 
-    showProductPage: function (e) {
-        const productId = e.currentTarget.dataset.productId
-        console.log(`je suis clické depuis le produit numéro ${productId}`)
+    showProductPage: async function (productId) {
+        
+        const urlItem = ProductApi.idUrl(productId)
+        const productDetails = await ProductApi.getOneProduct(urlItem)
+        
+        // const productId = e.currentTarget.dataset.productId
+        // console.log(`je suis clické depuis le produit numéro ${productId}`)
     }
 }
-window.onload = Dom.buildTeddiesItems()
+
+let tag = Dom.buildProducts
+let deTag = Dom.refreshProductsList
+
+let isClicked = true
+console.log(isClicked)
+
+function getItems(currentParam) {
+    isClicked = !isClicked
+    console.log(isClicked)
+    console.log(currentParam)
+    if (isClicked === true && (currentParam === 'teddies' || currentParam === 'cameras' || currentParam === 'furniture')) {
+        return deTag()
+    }
+    if (isClicked === false) {
+        return tag(currentParam)
+    }
+}

@@ -1,11 +1,19 @@
 const ProductApi = {
-    baseUrl: 'http://localhost:3000/api/teddies',
+    baseUrl: function (param) {
+        return 'http://localhost:3000/api/'+ param
+        
+    },
+    idUrl: function () {
+        let queryStr = window.location.search
+        let urlStr = new URLSearchParams(queryStr)
+        return 'http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id")
+    },
 
-    getProducts: async function () {
+    getProducts: async function (url) {
         /*const products = await fetch(ProductApi.baseUrl)*/
         // fetch une vrai api
-        var items = [];
-        const products = await fetch(ProductApi.baseUrl)
+
+        return await fetch(url)
         .then(function (response) {
             if (!response.ok) {
               throw new Error('HTTP error, status = ' + response.status);
@@ -14,21 +22,29 @@ const ProductApi = {
         })
         .then(function (json) {
             console.log(json)
-            for (let obj of json) {
-            items.push(obj)
-            } 
+            return json;
         })
         .catch(function (error) {
                 console.log(error);
         })
-        console.log('caca')
-        console.log(items)
-        console.log('pipi')
     },
 
-    getProduct: function (id) {
-        console.log('Get a single product')
-    },
+/*     getOneProduct: async function (urlItem) {
+        
+        return await fetch(urlItem)
+        .then(function (response) {
+            if (!response.ok) {
+              throw new Error('HTTP error, status = ' + response.status);
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data)
+        })
+        .catch(function (error) {
+                console.log(error);
+        })
+    }, */
 
     createOrder: function () {
         console.log('Create an order')
