@@ -3,11 +3,11 @@ const ProductApi = {
         return 'http://localhost:3000/api/'+ param
         
     },
-    // idUrl: function (urlStr) {
-    //     let queryStr = window.location.search
-    //     let urlStr = new URLSearchParams(queryStr)
-    //     return 'http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id")
-    // },
+    idUrl: function () {
+        let queryStr = window.location.search
+        let urlStr = new URLSearchParams(queryStr)
+        return 'http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id")
+    },
 
     getProducts: async function (url) {
         /*const products = await fetch(ProductApi.baseUrl)*/
@@ -29,11 +29,22 @@ const ProductApi = {
         })
     },
 
-    // getOneProduct: async function () {
-    //     let queryStr = window.location.search;
-    //     let urlStr = new URLSearchParams(queryStr);
-    //     console.log('Get a single product')
-    // },
+/*     getOneProduct: async function (urlItem) {
+        
+        return await fetch(urlItem)
+        .then(function (response) {
+            if (!response.ok) {
+              throw new Error('HTTP error, status = ' + response.status);
+            }
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data)
+        })
+        .catch(function (error) {
+                console.log(error);
+        })
+    }, */
 
     createOrder: function () {
         console.log('Create an order')

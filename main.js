@@ -12,7 +12,7 @@ const Dom = {
         id = template.getElementById(('title'))
         id.innerHTML = p._id
         link = template.getElementById(('link'))
-        link.href = 'src/pages/products.html?type=' + productType + '&id=' + p._id
+        link.href = 'assets/pages/products.html?type=' + productType + '&id=' + p._id
         item.setAttribute('data-product-id', i)
         item.addEventListener('click', Dom.showProductPage)
         Dom.productsList.appendChild(template)
@@ -21,15 +21,15 @@ const Dom = {
     refreshProductsList: function () {
         document.getElementById('products-list').innerHTML = " "
     },
-    buildTeddiesItems: async function () {
-    },
-    // showProductPage: function (productId) {
-    //     // const productId = e.currentTarget.dataset.productId
-    //     // console.log(`je suis clické depuis le produit numéro ${productId}`)
-    //     const url = ProductApi.baseUrl(productType)
-    //     const products = await ProductApi.getProducts(url)
 
-    // }
+    showProductPage: async function (productId) {
+        
+        const urlItem = ProductApi.idUrl(productId)
+        const productDetails = await ProductApi.getOneProduct(urlItem)
+        
+        // const productId = e.currentTarget.dataset.productId
+        // console.log(`je suis clické depuis le produit numéro ${productId}`)
+    }
 }
 
 let tag = Dom.buildProducts
