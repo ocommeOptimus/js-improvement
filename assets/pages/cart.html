@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="">
+        <meta name="robots" content="INDEX, FOLLOW">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+        
+        <title>Orinoco - Entreprise de commerce en ligne</title>
+        <meta name="description" content="Orinoco se démarque des grands sites e-commerce en créant des applications thématiques ne vendant qu'un seul groupe de produits.">
+
+    </head>
+    <body id="cart-page">
+        <header class="header">
+            <a class="header__link" href="../../index.html">
+                <img class="header__logo" src="../../src/assets/img/logo.png">
+            </a>
+            <a id="btn-cart" href="./cart.html" class="header__link--icons">
+                <img class="header__cart-img" src="../../src/assets/img/cart.png" alt="Image caddie">
+                <p class="header__cart-num" id="cart-num"></p>
+            </a>
+        </header>
+        
+        <div class="container" id="cart"></div>
+        <div class="container" id="total"></div>
+        <div class="container" id="form"></div>
+
+        <template id="template-cart">
+            <h1 class="presentation__title">Panier</h1>
+            <section id="cart-products" class="cart__products">
+                <article id="cart-article" class="cart__products-details">
+                    <a id="cart-link">
+                        <img id="cart-image" class="cart__products-image">
+                    </a>
+                    <div class="cart__products-description">
+                        <h3 id="cart-title" class="cart__products-title">
+                        </h3>
+                        <p id="cart-ref">
+                        </p>
+                        <p id="cart-price">
+                        </p>
+                        <label class="cart__products-quantity">
+                            <p id="cart-quantity">
+                            </p>
+                            <div>
+                                <button id="btn-more" class="cart__products-btn-quantity">+</button>
+                                <button id="btn-less" class="cart__products-btn-quantity">-</button>
+                            </div>
+                        </label>
+                        <p id="cart-products-total" class="cart__products-price">
+                        </p>
+                    </div>
+                </article>
+            </section>
+        </template>
+        <template id="template-total">
+            <h3 id="cart-total" class="cart__total">
+            </h3>
+        </template>
+        <template id="template-form">
+            <section class="cart__form-section">
+                <h2 class="cart__form-section">
+                    Finalisez votre commande !
+                </h2>
+                <form class="cart__form" id="cart-form">
+                    <div class="cart__form-fields">
+                        <label for="lastName">Nom * : </label>
+                            <input type="text" name="lastName" id="lastName" class="cart__form-input" required="" placeholder="Nom" pattern="^[A-Z]{1}[a-z ]+$" onkeyup="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();">
+                    </div>
+
+                    <div class="cart__form-fields">
+                        <label for="firstName">Prénom * : </label>
+                            <input type="text" name="firstName" id="firstName" class="cart__form-input" required="" placeholder="Prénom" pattern="^[A-Z]{1}[A-Za-zÀ-ÿ -]+$" onkeyup="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();">
+                    </div>
+
+                    <div class="cart__form-fields">
+                        <label for="address">Adresse * : </label>
+                            <input type="text" name="address" id="address" class="cart__form-input" required="" placeholder="N° et nom de la rue/avenue" pattern="^[0-9]{1,4}[ ,-][ A-Za-zÀ-ÿ0-9-]+$" onkeyup="this.value = this.value.toLowerCase();">
+                    </div>
+
+                    <div class="cart__form-fields">
+                        <label for="city">Ville * : </label>
+                            <input type="text" name="city" id="city" class="cart__form-input" required="" placeholder="Ville" pattern="^[A-Z]{1}[a-zA-Z- ]+$" onkeyup="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();">
+                    </div>
+
+                    <div class="cart__form-fields">
+                    <label for="phone">Téléphone <span>(facultatif)</span> : </label>
+                        <input type="" name="phone" id="phone" class="cart__form-input" placeholder="Téléphone" pattern="^(?:(?:+|00)33|0)s*[1-9](?:[s.-]*d{2}){4}$" onkeyup="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();">
+                    </div>
+
+                    <div class="cart__form-fields">
+                        <label for="email">Email * : </label>
+                            <input type="email" name="email" id="email" class="cart__form-input" required="" placeholder="Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})+$" onkeyup="this.value = this.value.toLowerCase();">
+                     </div>
+
+                     <div class="cart__form-fields">
+                        <button type="button" id="btn-submit" class="cart__form-btn">Validez votre commande</button>
+                     </div>
+
+                     <p class="cart__form-required">Les champs marqués d'un * sont obligatoires</p>
+
+                </form>
+            </section>
+        </template>
+
+        <footer class="footer">
+            <div class="footer__info">
+                <ul>
+                    <li class="footer__link-left"> 
+                        <a class="footer__link-text" href="./aboutus.html" target="_blank">A propos de nous</a> 
+                    </li>
+                    <li class="footer__link-middle"> 
+                        <a class="footer__link-text" href="./legalnotice.html" target="_blank">Mentions légales</a> 
+                    </li>
+                    <li class="footer__link-right"> 
+                        <a class="footer__link-text" href="mailto:contact@orinoco.com">Contactez-nous</a> 
+                    </li>
+                </ul>
+            </div>
+        </footer>
+        <script type="text/javascript" src="../../data/productsDataSource.js"></script>
+        <script type="text/javascript" src="../cart.js"></script>
+    </body>
+</html>
