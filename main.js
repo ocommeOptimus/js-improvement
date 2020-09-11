@@ -21,31 +21,44 @@ const Dom = {
     refreshProductsList: function () {
         document.getElementById('products-list').innerHTML = " "
     },
-
-    showProductPage: async function (productId) {
-        
+/*     showProductDetails: async function (productId) {
         const urlItem = ProductApi.idUrl(productId)
         const productDetails = await ProductApi.getOneProduct(urlItem)
-        
-        // const productId = e.currentTarget.dataset.productId
-        // console.log(`je suis clické depuis le produit numéro ${productId}`)
-    }
+    }, */
+    showProductPage: async function (param) {
+        let tag = Dom.buildProducts
+        let deTag = Dom.refreshProductsList
+
+        console.log(isClicked)
+        console.log(param)
+        if (isClicked === true && (param === 'teddies' || param === 'cameras' || param === 'furniture')) {
+            deTag()
+        }
+        if (isClicked === false) {
+            tag(param)
+        }
+    },
+    cartProductsNumber: function () {
+        let productsAdded;
+        if (JSON.parse(localStorage.getItem('cart')) === null) {
+            productsAdded = 0;
+        }
+        else {
+          productsAdded = JSON.parse(localStorage.getItem('cart')).length;
+          if (document.querySelector('#btn-cart')) {
+              document.querySelector('#cart-num').innerHTML = "( " + productsAdded + " )";
+          }
+          else {
+              document.querySelector('#cart-num').innerHTML = "( " + productsAdded + " )";
+          }
+        }
+    },
 }
 
-let tag = Dom.buildProducts
-let deTag = Dom.refreshProductsList
-
 let isClicked = true
-console.log(isClicked)
 
 function getItems(currentParam) {
     isClicked = !isClicked
-    console.log(isClicked)
-    console.log(currentParam)
-    if (isClicked === true && (currentParam === 'teddies' || currentParam === 'cameras' || currentParam === 'furniture')) {
-        return deTag()
-    }
-    if (isClicked === false) {
-        return tag(currentParam)
-    }
+    Dom.showProductPage(currentParam)   
 }
+

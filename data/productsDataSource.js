@@ -27,26 +27,5 @@ const ProductApi = {
         .catch(function (error) {
                 console.log(error);
         })
-    },
-
-/*     getOneProduct: async function (urlItem) {
-        
-        return await fetch(urlItem)
-        .then(function (response) {
-            if (!response.ok) {
-              throw new Error('HTTP error, status = ' + response.status);
-            }
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data)
-        })
-        .catch(function (error) {
-                console.log(error);
-        })
-    }, */
-
-    createOrder: function () {
-        console.log('Create an order')
     }
 }
