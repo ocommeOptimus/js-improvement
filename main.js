@@ -1,6 +1,6 @@
 const Dom = {
-    productsList: document.getElementById('products-list'),
-    product: document.getElementById('template-product'),
+    catalog: document.getElementById('catalog'),
+    product: document.getElementById('template-index'),
     productDescription: document.getElementById('product-details'),
     productInfo: document.getElementById('template-product-details'),
 
@@ -10,14 +10,20 @@ const Dom = {
 
         products.forEach((p, i) => {
         const template = document.importNode(Dom.product.content, true)
-        const item = template.getElementById('product')
-        id = template.getElementById(('title'))
-        id.innerHTML = p._id
-        link = template.getElementById(('link'))
+        const item = template.getElementById('products')
+        link = template.getElementById('link')
         link.href = 'assets/pages/products.html?type=' + productType + '&id=' + p._id
+        productName = template.getElementById('title')
+        productName.innerHTML = p.name
+        image = template.getElementById('image')
+        image.src = p.imageUrl
+        image.alt = 'Image de l\'article : ' + p.name
+        image.title = 'Image de l\'article : ' + p.name
+        description = template.getElementById('description')
+        description.innerHTML = p.description
         item.setAttribute('data-product-id', i)
         item.addEventListener('click', Dom.showProductPage)
-        Dom.productsList.appendChild(template)
+        Dom.catalog.appendChild(template)
         })
     },
     refreshProductsList: function () {
@@ -41,17 +47,17 @@ const Dom = {
         }
     },
     cartProductsNumber: function () {
-        let productsAdded;
+        let productsAdded
         if (JSON.parse(localStorage.getItem('cart')) === null) {
-            productsAdded = 0;
+            productsAdded = 0
         }
         else {
           productsAdded = JSON.parse(localStorage.getItem('cart')).length;
           if (document.getElementById('btn-cart')) {
-              document.getElementById('cart-num').innerHTML = "( " + productsAdded + " )";
+              document.getElementById('cart-num').innerHTML = "( " + productsAdded + " )"
           }
           else {
-              document.getElementById('cart-num').innerHTML = "( " + productsAdded + " )";
+              document.getElementById('cart-num').innerHTML = "( " + productsAdded + " )"
           }
         }
     },
@@ -160,10 +166,9 @@ function getItems(currentParam) {
 
 function read() {
     console.log(window.location.pathname)
-    if (window.location.pathname == '/Users/jeremyboisdur/Desktop/ocommeOptimus/web/openclassrooms/cours/js-improvement/assets/pages/products.html') {
+    if (window.location.pathname == '/home/jeremyboisdur/Bureau/developpement-web/js-improvement/assets/pages/products.html') {
        Dom.showProductDetails()
     }
 }
 
 window.onload = Dom.cartProductsNumber(), read()
-//window.onload = Dom.showProductDetails

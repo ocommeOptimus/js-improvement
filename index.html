@@ -16,7 +16,7 @@
                 display: flex;
             }
     
-            .product {
+            .products {
                 border: 1px solid green;
                 margin: 10px;
             }
@@ -28,9 +28,9 @@
             <a class="header__link" href="#">
                 <img class="header__logo" src="./src/assets/img/logo.png">
             </a>
-            <a href="./src/pages/cart.html" class="header__link--icons">
+            <a href="./assets/pages/cart.html" class="header__link--icons">
                 <img class="header__cart-img" src="./src/assets/img/cart.png" alt="Image caddie">
-                <p class="header__cart-num" id="cart-num"></p>
+                <p class="header__cart-num" id="cart-num">0</p>
             </a>
         </header>
         
@@ -91,11 +91,20 @@
                     </div>
                 </div>
             </div>
-            <div id="products-list"></div>
-            <template id="template-product">
-                <div id="product" class="product">
-                    <div id="title"></div>
-                    <a id="link">LIEN</a>
+            <div id="catalog"></div>
+            <template id="template-index">
+                <div id="products" class="products">
+                    <article class="products__article">
+                        <a id="link" class="products__link">
+                            <img id="image" class="products__img">
+                            <div class="products__info">
+                                <h3 id="title" class="products__title">  
+                                </h3>
+                                <p id="description" class="products__text">
+                                </p>
+                            </div>
+                        </a>
+                    </article>
                 </div>
             </template>
         </div>
