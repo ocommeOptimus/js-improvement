@@ -21,8 +21,7 @@ const Dom = {
             image.title = 'Image de l\'article : ' + p.name
             description = template.getElementById('description')
             description.innerHTML = p.description
-            item.setAttribute('data-product-id', i)
-            item.addEventListener('click', Dom.showProductPage)
+            item.setAttribute('id', 'products-' + i)
             Dom.catalog.appendChild(template)
         })
     },

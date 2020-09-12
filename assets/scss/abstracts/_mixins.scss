@@ -1,0 +1,32 @@
+@mixin flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@mixin flex-space {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+@mixin font-face($map){
+    @each $mod, $val in $map {
+      @font-face {
+        font-family: $mod;
+        src: url('../fonts/#{$val}') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        }
+    }
+}
+@mixin box-shadow($map){
+    @each $card-number, $val in $map {
+        &--shadow-#{$card-number} {
+            box-shadow: 1px 1px 22px lighten(map-get($val, txt), 35);
+        }
+    }
+}

@@ -1,0 +1,24 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+
+}
+
+body {
+    box-sizing: border-box;
+    background-image: url(../img/triangle-mosaic.png);
+    margin-bottom: 145px;
+    @media (max-width: 992px) {
+        margin-bottom: 100px;
+    }
+    @media (max-width:576px) {
+        margin-bottom: 75px;
+    }
+}
