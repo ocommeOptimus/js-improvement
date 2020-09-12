@@ -29,27 +29,42 @@
             <p id="return"></p>    
             <a id="btn-cart" href="./cart.html" class="header__link--icons">
                 <img class="header__cart-img" src="../../src/assets/img/cart.png" alt="Image caddie">
-                <p class="header__cart-num" id="cart-num"></p>
+                <p class="header__cart-num" id="cart-num">0</p>
             </a>
         </header>
         
         <div class="product-details" id="product-details">
         </div>
-        <template id="template-product-details">
+        <template id="template-product">
             <div id="product-information" class="product">
-                <div id="title-product"></div>
-                <label>
-                    Options :
-                    <select id="option-select">
-                    </select>
-                </label>
-                <label>
-                    Quantité :
-                    <select id="quantity-select">
-                    </select>
-                </label>
-                <p class="price"></p>
-                <button id="add-btn" class="product-details__btn" onClick="cartProductsNumber()">Ajouter au panier</button>
+                <h1 id="product-title" class="presentation__title">
+                </h1>
+                <section class="product-details__section">
+                    <img id="product-image" class="product-details__img">
+                    <div class="product-details__info">
+                        <h2 id="product-subtitle" class="product-details__title">
+                        </h2>
+                        <p id="product-ref" class="product-details__ref">
+                        </p>
+                        <p id="product-desc" class="product-details__text">
+                        </p>
+                        <label class="product-details__options">
+                            Options :
+                            <select id="product-options">
+                            </select>
+                        </label>
+                        <label class="product-details__quantity">
+                            Quantité :
+                            <select id="product-quantity">
+                            </select>
+                        </label>
+                        <p id="product-price" class="product-details__price">
+                        </p>
+                        <button id="add-btn" class="product-details__btn" onClick="cartProductsNumber()">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </section>
             </div>
         </template>
 
