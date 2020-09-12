@@ -116,7 +116,7 @@ const Dom = {
             
             if (cartProductNumber === null) {
                 cart = []
-                firstAddProduct = new Line(urlStr.get('type'), productDetails.imgUrl, productDetails.name, productDetails._id, parseInt(quantitySelect.value), productDetails.price)
+                firstAddProduct = new Line(urlStr.get('type'), productDetails.imageUrl, productDetails.name, productDetails._id, parseInt(quantitySelect.value), productDetails.price)
                 cart.push(firstAddProduct)
                 localStorage.setItem('cart', JSON.stringify(cart))
 
@@ -137,7 +137,7 @@ const Dom = {
                     }
                 }
                 if (!productAlreadyAdded) {
-                    cartProductNumber.push(new Line(urlStr.get('type'), productDetails.imgUrl, productDetails.name, productDetails._id, parseInt(quantitySelect.value), productDetails.price))
+                    cartProductNumber.push(new Line(urlStr.get('type'), productDetails.imageUrl, productDetails.name, productDetails._id, parseInt(quantitySelect.value), productDetails.price))
 
                     alert('Produit ajouté au panier !')
                     location.reload()
