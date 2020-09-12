@@ -125,8 +125,9 @@ const Dom = {
                     }
                     //Creating a class to easily add product purchased info
                     class Confirm {
-                        constructor(param, imgUrl, id, quantity, price) {
+                        constructor(param, name, imgUrl, id, quantity, price) {
                             this.param      = param
+                            this.name       = name
                             this.imgUrl     = imgUrl
                             this.id         = id
                             this.quantity   = quantity
@@ -156,7 +157,7 @@ const Dom = {
                             }
                             //we push product on dedicate subarray
                             productsOrdered[productsAddedToCart[l].param].push(productsAddedToCart[l].id.toString())
-                            confirm.push(new Confirm(productsAddedToCart[l].param, productsAddedToCart[l].imgUrl, productsAddedToCart[l].id, productsAddedToCart[l].quantity, productsAddedToCart[l].price))
+                            confirm.push(new Confirm(productsAddedToCart[l].param, productsAddedToCart[l].name, productsAddedToCart[l].imgUrl, productsAddedToCart[l].id, productsAddedToCart[l].quantity, productsAddedToCart[l].price))
                         }
 
                         //Initializing an array to get the param used to the POST request and adding it to orderIds

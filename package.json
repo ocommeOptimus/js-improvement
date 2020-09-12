@@ -1,0 +1,33 @@
+{
+  "name": "js-improvement",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "sass": "sass --watch ./assets/scss/main.scss:./assets/css/style.css",
+    "prefix": "postcss ./assets/css/style.css --use autoprefixer -d ./assets/css/",
+    "build": "webpack",
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ocommeOptimus/js-improvement.git"
+  },
+  "author": "ocommeOptimus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ocommeOptimus/js-improvement/issues"
+  },
+  "homepage": "https://github.com/ocommeOptimus/js-improvement#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.1.0",
+    "babel-polyfill": "^6.26.0",
+    "webpack": "^4.44.1"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.11.5"
+  }
+}
