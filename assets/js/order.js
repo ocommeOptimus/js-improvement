@@ -1,4 +1,4 @@
-const Dom = {
+const DomOrder = {
     order: document.getElementById('order'),
     orderTemplate: document.getElementById('template-order'),
     orderList: document.getElementById('order-list'),
@@ -8,7 +8,7 @@ const Dom = {
         let contact                     = JSON.parse(localStorage.getItem('contact'))
         let orderId                     = JSON.parse(localStorage.getItem('orderId'))
 
-        const orderTemplate = document.importNode(Dom.orderTemplate.content, true)
+        const orderTemplate = document.importNode(DomOrder.orderTemplate.content, true)
         orderRefList = orderTemplate.getElementById('order-refs')
 
         for (let i in orderId) {
@@ -23,7 +23,7 @@ const Dom = {
         orderEmail = orderTemplate.getElementById('order-email')
         orderEmail.innerHTML = contact.email
 
-        Dom.order.appendChild(orderTemplate)
+        DomOrder.order.appendChild(orderTemplate)
 
     },
     buildOrderList: function () {
@@ -31,7 +31,7 @@ const Dom = {
         let finalPriceOrder = 0
 
         orderConfirmation.forEach((c) => {
-            const orderProductTemplate = document.importNode(Dom.orderTemplateList.content, true)
+            const orderProductTemplate = document.importNode(DomOrder.orderTemplateList.content, true)
             orderImage = orderProductTemplate.getElementById('order-image')
             orderImage.src = c.imgUrl
             orderImage.alt = 'Image de ' + c.name
@@ -44,7 +44,7 @@ const Dom = {
             orderProductQuantity.innerHTML = 'Quantité : ' + c.quantity
             orderProductTotal = orderProductTemplate.getElementById('order-product-total')
             orderProductTotal.innerHTML = 'Prix total pour cet article : ' + (new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format((c.quantity * c.price)/100))
-            Dom.orderList.appendChild(orderProductTemplate)
+            DomOrder.orderList.appendChild(orderProductTemplate)
         })
 /*         for (let c in orderConfirmation) {
             const urlConfirmPath = orderConfirmation[c].param + "/" + orderConfirmation[c].id
@@ -58,7 +58,7 @@ const Dom = {
                 }
                 return response.json()
             }).then(function (data) {
-                const orderProductTemplate = document.importNode(Dom.orderTemplateList.content, true)
+                const orderProductTemplate = document.importNode(DomOrder.orderTemplateList.content, true)
                 orderImage = orderProductTemplate.getElementById('order-image')
                 orderImage.src = data.imageUrl
                 orderImage.alt = 'Image de ' + data.name
@@ -71,7 +71,7 @@ const Dom = {
                 orderProductQuantity.innerHTML = 'Quantité : ' + data.quantity
                 orderProductTotal = orderProductTemplate.getElementById('order-product-total')
                 orderProductTotal.innerHTML = 'Prix total pour cet article : ' + (new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format((data.quantity * data.price)/100))
-                Dom.orderList.appendChild(orderProductTemplate)
+                DomOrder.orderList.appendChild(orderProductTemplate)
 
             })
             .catch()
@@ -85,4 +85,4 @@ const Dom = {
         orderTotal.innerHTML = 'Prix de votre commande : ' + (new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(finalPriceOrder/100))
     }
 }
-window.onload = Dom.buildOrderText(), Dom.buildOrderList()
+window.onload = DomOrder.buildOrderText(), DomOrder.buildOrderList()

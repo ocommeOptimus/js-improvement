@@ -1,4 +1,4 @@
-const Dom = {
+const DomCart = {
     cart: document.getElementById('cart'),
     cartProducts: document.getElementById('template-cart'),
     total: document.getElementById('total'),
@@ -10,7 +10,7 @@ const Dom = {
         let productsAddedToCart = JSON.parse(localStorage.getItem('cart'))
         
         productsAddedToCart.forEach((c, i) => {
-            const cartTemplate = document.importNode(Dom.cartProducts.content, true)
+            const cartTemplate = document.importNode(DomCart.cartProducts.content, true)
             const cartProductsList = cartTemplate.getElementById('cart-products')
             cartLink = cartTemplate.getElementById('cart-link')
             cartLink.href = './product.html?type=' + c.param + '&id=' + c.id
@@ -53,13 +53,14 @@ const Dom = {
 
             cartProductsTotal = cartTemplate.getElementById('cart-products-total')
             cartProductsTotal.innerHTML = 'Prix total pour cet article : ' + (new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format((c.quantity * c.price)/100))
-            Dom.cart.appendChild(cartTemplate)
+            DomCart.cart.appendChild(cartTemplate)
         })      
     },
+
     buildTotalPrice: function () {
         let productsAddedToCart = JSON.parse(localStorage.getItem('cart'))
         let calculationTotalOrder = 0;
-        const cartTotalTemplate = document.importNode(Dom.cartFinalPrice.content, true)
+        const cartTotalTemplate = document.importNode(DomCart.cartFinalPrice.content, true)
 
         for (let j in productsAddedToCart) {
             calculationTotalOrder += productsAddedToCart[j].price * productsAddedToCart[j].quantity
@@ -68,15 +69,16 @@ const Dom = {
         cartTotal = cartTotalTemplate.getElementById('cart-total')
         cartTotal.innerHTML = 'Prix total de votre commande: ' + (new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(calculationTotalOrder/100))
 
-        Dom.total.appendChild(cartTotalTemplate)
+        DomCart.total.appendChild(cartTotalTemplate)
 
     },
+
     buildForm: function () {
         let productsAddedToCart = JSON.parse(localStorage.getItem('cart'))
         let orderIds = []
         
-            const formTemplate = document.importNode(Dom.cartForm.content, true)
-            Dom.form.appendChild(formTemplate)
+            const formTemplate = document.importNode(DomCart.cartForm.content, true)
+            DomCart.form.appendChild(formTemplate)
 
             class OrderConfirm {
                 constructor(id, param){
@@ -189,9 +191,9 @@ const Dom = {
 
 function displayCart () {
     if (JSON.parse(localStorage.getItem('cart') !== null)) {
-        Dom.buildCart()
-        Dom.buildTotalPrice()
-        Dom.buildForm()
+        DomCart.buildCart()
+        DomCart.buildTotalPrice()
+        DomCart.buildForm()
     }
     else {
         alert('Votre pannier est vide !')

@@ -1,21 +1,34 @@
-const Dom = {
+const DomProduct = {
     productDescription: document.getElementById('product-details'),
-    productInfo: document.getElementById('template-product-details'),
+    productInfo: document.getElementById('template-product'),
      
     showProductDetails: async function (productId) {
         let firstProperty = ""
         let queryStr = window.location.search
         let urlStr = new URLSearchParams(queryStr)
-
+        
         const urlItem = ProductApi.idUrl(productId)
         const productDetails = await ProductApi.getProducts(urlItem)
         
-        const template = document.importNode(Dom.productInfo.content, true)
+        const template = document.importNode(DomProduct.productInfo.content, true)
         const item = template.getElementById('product-information')
-        id = template.getElementById('title-product')
-        id.innerHTML = productDetails._id
-        Dom.productDescription.appendChild(template)
+        productTitle = template.getElementById('product-title')
+        productTitle.innerHTML = urlStr.get('type') + ' ' + productDetails.name
+        productImage = template.getElementById('product-image')
+        productImage.src = productDetails.imageUrl
+        productImage.alt = 'Image de ' + urlStr.get('type') + ' ' + productDetails.name
+        productImage.title = urlStr.get('type') + ' ' + productDetails.name
+        productSubtitle = template.getElementById('product-subtitle')
+        productSubtitle.innerHTML = productDetails.name
+        productRef = template.getElementById('product-ref')
+        productRef.innerHTML = 'Ref. n° ' + productDetails._id
+        productDesc = template.getElementById('product-desc')
+        productDesc.innerHTML = productDetails.description
+        productPrice = template.getElementById('product-price')
+        productPrice.innerHTML = 'Prix : ' + (new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(productDetails.price/100))
         const button = document.getElementById('add-btn')
+        DomProduct.productDescription.appendChild(template)
+        // const button = document.getElementById('add-btn')
 
         switch (urlStr.get('type')) {
             case "teddies":
@@ -29,11 +42,11 @@ const Dom = {
                 break;
         }
 
-        Dom.getAllOptions(firstProperty, productDetails)
+        DomProduct.getAllOptions(firstProperty, productDetails)
 
-        Dom.setQuantity()
+        DomProduct.setQuantity()
 
-        button.addEventListener('click', function (event) {
+        document.getElementById('add-btn').addEventListener('click', function (event) {
             let cartProductNumber = JSON.parse(localStorage.getItem('cart'))
 
             class Line {
@@ -49,11 +62,12 @@ const Dom = {
             
             if (cartProductNumber === null) {
                 cart = []
-                firstAddProduct = new Line(urlStr.get('type'), productDetails.imgUrl, productDetails.name, productDetails._id, parseInt(quantitySelect.value), productDetails.price)
+                firstAddProduct = new Line(urlStr.get('type'), productDetails.imageUrl, productDetails.name, productDetails._id, parseInt(quantitySelect.value), productDetails.price)
                 cart.push(firstAddProduct)
                 localStorage.setItem('cart', JSON.stringify(cart))
 
                 alert('Produit ajouté au panier !')
+                location.reload()
             }
             else {
                 // cartUpdateNumber = JSON.parse(localStorage.getItem('cart'))
@@ -65,29 +79,33 @@ const Dom = {
                         cartProductNumber[k].quantity = parseInt(cartProductNumber[k].quantity) + parseInt(quantitySelect.value)
 
                         alert('Quantité modifiée !')
+                        location.reload()
                     }
                 }
                 if (!productAlreadyAdded) {
-                    cartProductNumber.push(new Line(urlStr.get('type'), productDetails.imgUrl, productDetails.name, productDetails._id, parseInt(quantitySelect.value), productDetails.price))
+                    cartProductNumber.push(new Line(urlStr.get('type'), productDetails.imageUrl, productDetails.name, productDetails._id, parseInt(quantitySelect.value), productDetails.price))
 
                     alert('Produit ajouté au panier !')
+                    location.reload()
                 }
                 localStorage.setItem('cart', JSON.stringify(cartProductNumber))
             }
         })
     },
+
     getAllOptions: function (value, param) {
         param[value].forEach((value, i) => {
-            optionSelect = document.getElementById('option-select')
+            optionSelect = document.getElementById('product-options')
             optionChoice = document.createElement('option')
             optionValue = document.createTextNode(value)
             optionChoice.appendChild(optionValue)
             optionSelect.appendChild(optionChoice)
         }) 
     },
+
     setQuantity: function () {
         let j = 0;
-        quantitySelect = document.getElementById('quantity-select')
+        quantitySelect = document.getElementById('product-quantity')
         while (j <= 8) {
             j++;
             option = document.createElement('option');
@@ -95,7 +113,7 @@ const Dom = {
             option.value = j;
             quantitySelect.appendChild(option);
         }
-    }
+    },
 }
 
-window.onload = Dom.showProductDetails
+window.onload = DomProduct.showProductDetails()
