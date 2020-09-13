@@ -28,7 +28,7 @@ const DomProduct = {
         productPrice.innerHTML = 'Prix : ' + (new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(productDetails.price/100))
         const button = document.getElementById('add-btn')
         DomProduct.productDescription.appendChild(template)
-        // const button = document.getElementById('add-btn')
+
 
         switch (urlStr.get('type')) {
             case "teddies":
@@ -70,7 +70,7 @@ const DomProduct = {
                 location.reload()
             }
             else {
-                // cartUpdateNumber = JSON.parse(localStorage.getItem('cart'))
+
                 productAlreadyAdded = false
 
                 for (let k in cartProductNumber) {

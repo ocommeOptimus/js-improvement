@@ -10,11 +10,9 @@ const ProductApi = {
         let urlStr = new URLSearchParams(queryStr)
         return 'http://localhost:3000/api/' + urlStr.get('type') + "/" + urlStr.get("id")
     },
-    // paramUrl: function (arr) {
-    //     return 'http://localhost:3000/api' + arr.param + "/" + arr.id
-    // },
-    getProducts: async function (url) {
 
+    getProducts: async function (url) {
+        
         return await fetch(url)
         .then(function (response) {
             if (!response.ok) {

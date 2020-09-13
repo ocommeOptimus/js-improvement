@@ -38,16 +38,6 @@ const Dom = {
         }
     },
 
-    // cartProductsNumber: function () {
-    //     let productsAdded = 0
-    //     if (JSON.parse(localStorage.getItem('cart')) === null) {
-    //         document.getElementById('cart-num').innerHTML = "( " + productsAdded + " )"
-    //     }
-    //     else {
-    //         productsAdded = JSON.parse(localStorage.getItem('cart')).length
-    //         document.getElementById('cart-num').innerHTML = "( " + productsAdded + " )"
-    //     }
-    // },
     cartProductsNumber: function () {
       productsAdded = JSON.parse(localStorage.getItem('cart')).length
       document.getElementById('cart-num').innerHTML = "( " + productsAdded + " )"
@@ -61,15 +51,6 @@ function getItems(currentParam) {
     Dom.showProductPage(currentParam)   
 }
 
-// function read() {
-//     console.log(window.location.pathname)
-//     if (window.location.pathname == '/home/jeremyboisdur/Bureau/developpement-web/js-improvement/assets/pages/product.html') {
-//        Dom.showProductDetails()
-//     } else {
-//         alert('wussup dude !')
-//     }
-// }
-
 function updateCartNumber() {
     if (JSON.parse(localStorage.getItem('cart')) !== null) {
         Dom.cartProductsNumber()
@@ -80,12 +61,3 @@ function updateCartNumber() {
 }
 
 window.onload = updateCartNumber()
-
-// setTimeout(function(){
-//     Dom.cartProductsNumber()
-// }, 350);
-
-// const cartProductNumber = JSON.parse(localStorage.getItem('cart')
-
-// if (cartProductNumber !== null) {
-//     Dom.cartProductsNumber()

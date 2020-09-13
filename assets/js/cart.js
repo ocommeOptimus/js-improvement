@@ -181,11 +181,6 @@ const DomCart = {
                     }
                 })
             
-            //}
-            // else {
-            //     alert('Votre pannier est vide !')
-            //     window.location.href = '../../index.html'
-            // }
     }
 }
 
