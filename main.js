@@ -1,3 +1,5 @@
+import "regenerator-runtime/runtime";
+
 const Dom = {
     catalog: document.getElementById('catalog'),
     product: document.getElementById('template-index'),

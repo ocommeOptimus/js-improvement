@@ -5,13 +5,13 @@ module.exports = {
   entry: {
     polyfill: "babel-polyfill",
     main: "./main.js",
-    product: "./assets/js/products.js",
+    product: "./assets/js/product.js",
     cart: "./assets/js/cart.js",
     order: "./assets/js/order.js"
   },
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(assets, "dist")
+    path: path.resolve('./assets', "dist")
   },
   module: {
     rules: [
