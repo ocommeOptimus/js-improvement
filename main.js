@@ -26,17 +26,23 @@ const Dom = {
         document.getElementById('catalog').innerHTML = " "
     },
 
-    showProductPage: async function (param) {
-        let tag = Dom.buildProducts
-        let deTag = Dom.refreshProductsList
-
-        if (isClicked === true && (param === 'teddies' || param === 'cameras' || param === 'furniture')) {
-            deTag()
+    showProductPage: function (param) {   
+        if ((isClicked == true && currentParam == '') || (isClicked == true && currentParam == param)) {
+            currentParam = param
+            Dom.buildProducts(currentParam)
         }
-        if (isClicked === false) {
-            tag(param)
+        if (isClicked == false && currentParam != param) {
+            currentParam = param
+            isClicked = !isClicked
+            Dom.refreshProductsList()
+            Dom.buildProducts(currentParam)
+        }
+        if (isClicked == false && currentParam == param) {
+            currentParam = ''
+            Dom.refreshProductsList()
         }
     },
+    
 
     cartProductsNumber: function () {
       productsAdded = JSON.parse(localStorage.getItem('cart')).length
@@ -44,11 +50,13 @@ const Dom = {
     }
 }
 
-let isClicked = true
 
-function getItems(currentParam) {
+let isClicked = false
+let currentParam = ''
+
+function getItems(param) {
     isClicked = !isClicked
-    Dom.showProductPage(currentParam)   
+    Dom.showProductPage(param)
 }
 
 function updateCartNumber() {
