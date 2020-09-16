@@ -1,6 +1,9 @@
 import "regenerator-runtime/runtime";
 
 const Dom = {
+    isClicked: false,
+    currentParam: '',
+    productCategory: ['teddies', 'cameras', 'furniture'],
     catalog: document.getElementById('catalog'),
     product: document.getElementById('template-index'),
 
@@ -11,11 +14,11 @@ const Dom = {
         products.forEach((p, i) => {
             const template = document.importNode(Dom.product.content, true)
             const item = template.getElementById('products')
-            link = template.getElementById('link')
+            let link = template.getElementById('link')
             link.href = 'assets/pages/product.html?type=' + productType + '&id=' + p._id
-            productName = template.getElementById('title')
+            let productName = template.getElementById('title')
             productName.innerHTML = p.name
-            image = template.getElementById('image')
+            let image = template.getElementById('image')
             image.src = p.imageUrl
             image.alt = 'Image de l\'article : ' + p.name
             image.title = 'Image de l\'article : ' + p.name
@@ -29,45 +32,54 @@ const Dom = {
     },
 
     showProductPage: function (param) {   
-        if ((isClicked == true && currentParam == '') || (isClicked == true && currentParam == param)) {
-            currentParam = param
-            Dom.buildProducts(currentParam)
+        if ((Dom.isClicked == true && Dom.currentParam == '') || (Dom.isClicked == true && Dom.currentParam == param)) {
+            Dom.currentParam = param
+            Dom.buildProducts(Dom.currentParam)
         }
-        if (isClicked == false && currentParam != param) {
-            currentParam = param
-            isClicked = !isClicked
+        if (Dom.isClicked == false && Dom.currentParam != param) {
+            Dom.currentParam = param
+            Dom.isClicked = !Dom.isClicked
             Dom.refreshProductsList()
-            Dom.buildProducts(currentParam)
+            Dom.buildProducts(Dom.currentParam)
         }
-        if (isClicked == false && currentParam == param) {
-            currentParam = ''
+        if (Dom.isClicked == false && Dom.currentParam == param) {
+            Dom.currentParam = ''
             Dom.refreshProductsList()
         }
     },
-    
+
+    toggleItems: function () {
+        
+        function show(e) {
+            Dom.isClicked = !Dom.isClicked
+            Dom.showProductPage(e.currentTarget.id)
+        }
+
+        for (let x = 0; x < Dom.productCategory.length; x++) {
+            document.getElementById(Dom.productCategory[x]).addEventListener("click", show, false)
+        }
+    },
+
+    getItems: function () {
+               
+        if (window.location.pathname == '/index.html') {
+            Dom.toggleItems()
+        }
+    },
 
     cartProductsNumber: function () {
-      productsAdded = JSON.parse(localStorage.getItem('cart')).length
+      let productsAdded = JSON.parse(localStorage.getItem('cart')).length
       document.getElementById('cart-num').innerHTML = "( " + productsAdded + " )"
+    },
+
+    updateCartNumber: function () {
+        if (JSON.parse(localStorage.getItem('cart')) !== null) {
+            Dom.cartProductsNumber()
+        }
+        else {
+            document.getElementById('cart-num').innerHTML = '(' + 0 + ')'
+        }
     }
 }
 
-
-let isClicked = false
-let currentParam = ''
-
-function getItems(param) {
-    isClicked = !isClicked
-    Dom.showProductPage(param)
-}
-
-function updateCartNumber() {
-    if (JSON.parse(localStorage.getItem('cart')) !== null) {
-        Dom.cartProductsNumber()
-    }
-    else {
-        document.getElementById('cart-num').innerHTML = '(' + 0 + ')'
-    }
-}
-
-window.onload = updateCartNumber()
+window.onload = Dom.updateCartNumber(), Dom.getItems()

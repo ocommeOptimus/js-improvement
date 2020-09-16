@@ -9,7 +9,7 @@ const DomOrder = {
         let orderId                     = JSON.parse(localStorage.getItem('orderId'))
 
         const orderTemplate = document.importNode(DomOrder.orderTemplate.content, true)
-        orderRefList = orderTemplate.getElementById('order-refs')
+        let orderRefList = orderTemplate.getElementById('order-refs')
 
         for (let i in orderId) {
             let newRef = document.createElement('li');
@@ -17,10 +17,10 @@ const DomOrder = {
             orderRefList.appendChild(newRef);
         }
 
-        orderContact = orderTemplate.getElementById('order-contact')
+        let orderContact = orderTemplate.getElementById('order-contact')
         orderContact.innerHTML = contact.firstName + ' ' + contact.lastName
 
-        orderEmail = orderTemplate.getElementById('order-email')
+        let orderEmail = orderTemplate.getElementById('order-email')
         orderEmail.innerHTML = contact.email
 
         DomOrder.order.appendChild(orderTemplate)
@@ -32,17 +32,17 @@ const DomOrder = {
 
         orderConfirmation.forEach((c) => {
             const orderProductTemplate = document.importNode(DomOrder.orderTemplateList.content, true)
-            orderImage = orderProductTemplate.getElementById('order-image')
+            let orderImage = orderProductTemplate.getElementById('order-image')
             orderImage.src = c.imgUrl
             orderImage.alt = 'Image de ' + c.name
             orderImage.title = 'Image de ' + c.name
-            orderTitle = orderProductTemplate.getElementById('order-title')
+            let orderTitle = orderProductTemplate.getElementById('order-title')
             orderTitle.innerHTML = c.name
-            orderProductPrice = orderProductTemplate.getElementById('order-price')
+            let orderProductPrice = orderProductTemplate.getElementById('order-price')
             orderProductPrice.innerHTML = 'Prix : ' + (new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(c.price/100))
             orderProductQuantity = orderProductTemplate.getElementById('order-quantity')
             orderProductQuantity.innerHTML = 'Quantité : ' + c.quantity
-            orderProductTotal = orderProductTemplate.getElementById('order-product-total')
+            let orderProductTotal = orderProductTemplate.getElementById('order-product-total')
             orderProductTotal.innerHTML = 'Prix total pour cet article : ' + (new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format((c.quantity * c.price)/100))
             DomOrder.orderList.appendChild(orderProductTemplate)
         })
@@ -52,7 +52,7 @@ const DomOrder = {
             finalPriceOrder += orderConfirmation[t].price * orderConfirmation[t].quantity
         }
 
-        orderTotal = document.getElementById('order-total')
+        let orderTotal = document.getElementById('order-total')
         orderTotal.innerHTML = 'Prix de votre commande : ' + (new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(finalPriceOrder/100))
     }
 }
