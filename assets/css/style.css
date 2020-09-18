@@ -206,6 +206,50 @@ a {
     background-color: fade(#f3e9f1, 95%);
   }
 }
+#toast {
+  visibility: hidden;
+  min-width: 300px;
+  height: max-content;
+  background-color: #8f5bfe;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  right: 15px;
+  top: 15px;
+  font-size: 20px;
+}
+
+#toast.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+#toast.show--alert {
+  background-color: #DB464B;
+}
+
+@keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 15px;
+    opacity: 1;
+  }
+}
+@keyframes fadeout {
+  from {
+    top: 15px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
+}
 .header {
   background: #f3e9f1;
   height: 245px;

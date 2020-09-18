@@ -99,7 +99,7 @@ const DomProduct = {
                     cartProductNumber.push(new Line(urlStr.get('type'), productDetails.imageUrl, productDetails.name, productDetails._id, parseInt(quantitySelect.value), productDetails.price))
                     toastBox.innerHTML = 'Produit ajouté au panier !'
                     toastBox.className = "show"
-                    document.getElementById('cart-num').innerHTML = "( " + 1 + " )"
+                    document.getElementById('cart-num').innerHTML = "( " + cartProductNumber.length + " )"
                     setTimeout(function(){ toastBox.className = toastBox.className.replace("show", ""); }, 3000)
                     
                 }

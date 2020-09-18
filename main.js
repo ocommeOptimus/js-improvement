@@ -62,7 +62,7 @@ const Dom = {
 
     getItems: function () {
                
-        if (window.location.pathname == '/index.html') {
+        if (window.location.pathname == '/index.html' || window.location.href == 'http://localhost:8080/') {
             Dom.toggleItems()
         }
     },

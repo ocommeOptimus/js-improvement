@@ -8,6 +8,7 @@ const DomCart = {
 
     buildCart: function () {
         let productsAddedToCart = JSON.parse(localStorage.getItem('cart'))
+        let toggleCartRemove = false
         const toastBox = document.getElementById("toast")
 
         productsAddedToCart.forEach((c, i) => {
@@ -26,37 +27,52 @@ const DomCart = {
             let cartProductQuantity = cartTemplate.getElementById('cart-quantity')
             cartProductQuantity.innerHTML = 'Quantité : ' + c.quantity
             let buttonMore = cartTemplate.getElementById('btn-more')
+            buttonMore.setAttribute('id', 'btn-more-' + i)
             buttonMore.addEventListener('click', function (event) {
                 c.quantity++
                 localStorage.setItem('cart', JSON.stringify(productsAddedToCart))
+                toastBox.innerHTML = 'Quantité modifiée !'
+                toastBox.className = "show"
+                setTimeout(function(){ toastBox.className = toastBox.className.replace("show", ""); }, 3000)
                 document.getElementById('cart-num').innerHTML = "( " + productsAddedToCart.length + " )"
+                setTimeout(function() { location.reload(); }, 1500)
             });
 
             let buttonLess = cartTemplate.getElementById('btn-less')
+            buttonLess.setAttribute('id', 'btn-less-' + i)
             buttonLess.addEventListener('click', function (event) {
-                if (productsAddedToCart[i].quantity === 1) { 
-                    productsAddedToCart.splice([i], 1)
+                if (productsAddedToCart[i].quantity === 1) {
+                    toggleCartRemove = true
+                    if (productsAddedToCart.length === 1) {
+                        toastBox.innerHTML = c.name + ' a été supprimé et votre panier est vide !'
+                        toastBox.className = "show"
+                        setTimeout(function(){ toastBox.className = toastBox.className.replace("show", ""); }, 3000)
+                        document.getElementById('cart-num').innerHTML = "( " + productsAddedToCart.length + " )"
+                        localStorage.clear()
+                        setTimeout(function() { location.reload(); }, 3100)
+                        
+                    }
+                    if (productsAddedToCart.length > 1) {
+                        productsAddedToCart[i].quantity--
+                        productsAddedToCart.splice(i, 1)
+                        localStorage.setItem('cart', JSON.stringify(productsAddedToCart))
+                        toastBox.innerHTML = c.name + ' a été supprimé du panier !'
+                        toastBox.className = "show"
+                        setTimeout(function(){ toastBox.className = toastBox.className.replace("show", ""); }, 3000)
+                        document.getElementById('cart-num').innerHTML = "( " + productsAddedToCart.length + " )"
+                        setTimeout(function() { location.reload(); }, 1500)
+                    }
+                }
+                if (productsAddedToCart[i].quantity > 1 && toggleCartRemove == false) {
+                    productsAddedToCart[i].quantity--
                     localStorage.setItem('cart', JSON.stringify(productsAddedToCart))
-                    toastBox.innerHTML = c.name + ' a été supprimé du panier !'
+                    toastBox.innerHTML = 'Quantité modifiée !'
                     toastBox.className = "show"
                     setTimeout(function(){ toastBox.className = toastBox.className.replace("show", ""); }, 3000)
                     document.getElementById('cart-num').innerHTML = "( " + productsAddedToCart.length + " )"
-
+                    setTimeout(function() { location.reload(); }, 1500)
                 }
-                if (productsAddedToCart.length === 0) {
-                    localStorage.clear()
-                    toastBox.innerHTML = 'Panier vide !'
-                    toastBox.className = "show"
-                    toastBox.addEventListener('click', function (event) {
-                        toastBox.className = toastBox.className.replace("show", "")
-                        setTimeout(function() { window.location.pathname = '/index.html'; }, 3000)
-                    })
-                }
-                else {
-                    productsAddedToCart[i].quantity--;
-                    localStorage.setItem('cart', JSON.stringify(productsAddedToCart))
-                    document.getElementById('cart-num').innerHTML = "( " + productsAddedToCart.length + " )"
-                }
+                
             })
 
             let cartProductsTotal = cartTemplate.getElementById('cart-products-total')
@@ -203,12 +219,8 @@ const DomCart = {
             DomCart.buildForm()
         }
         else {
-            toastBox.innerHTML = 'Votre pannier est vide !'
-            toastBox.className = "show"
-            toastBox.addEventListener('click', function (event) {
-                toastBox.className = toastBox.className.replace("show", "")
-                setTimeout(function() { window.location.pathname = '/index.html'; }, 3000)
-            })
+            setTimeout(function() { alert('Panier vide !\n\nVous allez être redirigé vers la page d\'accueil'); }, 500)
+            setTimeout(function() { window.location.pathname = '/index.html'; }, 600)
             // setTimeout(function(){ toastBox.className = toastBox.className.replace("show", ""); }, 3000)
             // setTimeout(function(){ window.location.href = '../../index.html'; }, 5000)
             
