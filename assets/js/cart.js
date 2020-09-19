@@ -195,17 +195,21 @@ const DomCart = {
                 //Initializing an array to get the param used to the POST request and adding it to orderIds
                 let paramOrder = []
 
-                
-                localStorage.setItem('paramOrder', JSON.stringify(paramOrder))
+                //JSON.parse(productsOrdered)
+                //localStorage.setItem('paramOrder', JSON.stringify(paramOrder))
+                for (let i in productsOrdered) {
+                    paramOrder.push(i)
+                    localStorage.setItem('paramOrder', JSON.stringify(paramOrder))
 
-                sending("http://localhost:3000/api/order", new FormSent(newContact, productsOrdered))
-                .then(function () {
-                    if(Object.keys(productsOrdered) === orderIds) {
-                        localStorage.setItem('confirm', JSON.stringify(confirm))
-                        localStorage.removeItem('cart')
-                        window.location.pathname = '/assets/pages/order.html'
-                    }
-                })
+                    sending("http://localhost:3000/api/" + i + "/order", new FormSent(newContact, productsOrdered[i]))
+                    .then(function () {
+                        if(Object.keys(productsOrdered).length === orderIds.length) {
+                            localStorage.setItem('confirm', JSON.stringify(confirm))
+                            localStorage.removeItem('cart')
+                            window.location.pathname = '/assets/pages/order.html'
+                        }
+                    })
+                }
             }
         })
             
