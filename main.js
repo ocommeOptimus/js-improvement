@@ -15,7 +15,7 @@ const Dom = {
             const template = document.importNode(Dom.product.content, true)
             const item = template.getElementById('products')
             let link = template.getElementById('link')
-            link.href = 'assets/pages/product.html?type=' + productType + '&id=' + p._id
+            link.href = '/pages/product.html?type=' + productType + '&id=' + p._id
             let productName = template.getElementById('title')
             productName.innerHTML = p.name
             let image = template.getElementById('image')

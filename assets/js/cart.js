@@ -205,7 +205,7 @@ const DomCart = {
                         if(Object.keys(productsOrdered).length === orderIds.length) {
                             localStorage.setItem('confirm', JSON.stringify(confirm))
                             localStorage.removeItem('cart')
-                            window.location.pathname = '/assets/pages/order.html'
+                            window.location.pathname = '/pages/order.html'
                         }
                     })
                 }
