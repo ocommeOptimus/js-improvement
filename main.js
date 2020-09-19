@@ -61,7 +61,9 @@ const Dom = {
     },
 
     getItems: function () {
-               
+
+        Dom.updateCartNumber()
+        
         if (window.location.pathname == '/index.html' || window.location.href == 'http://localhost:8080/') {
             Dom.toggleItems()
         }
@@ -82,4 +84,4 @@ const Dom = {
     }
 }
 
-window.onload = Dom.updateCartNumber(), Dom.getItems()
+window.onload = Dom.getItems()

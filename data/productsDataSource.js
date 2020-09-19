@@ -21,7 +21,6 @@ const ProductApi = {
             return response.json();
         })
         .then(function (json) {
-            console.log(json)
             return json;
         })
         .catch(function (error) {

@@ -1,3 +1,32 @@
+// Creating class for sending contact infos
+class Contact {
+    constructor(firstName, lastName, address, city, email) {
+        this.firstName  = firstName
+        this.lastName   = lastName
+        this.address    = address
+        this.city       = city
+        this.email      = email
+    }
+}
+// Creating a class to post contact's object and product's array to server
+class FormSent {
+    constructor(user, products) {
+        this.contact    = user
+        this.products   = products
+    }
+}
+// Creating a class to easily add product purchased info
+class Confirm {
+    constructor(param, name, imgUrl, id, quantity, price) {
+        this.param      = param
+        this.name       = name
+        this.imgUrl     = imgUrl
+        this.id         = id
+        this.quantity   = quantity
+        this.price      = price
+    }
+}
+
 const DomCart = {
     cart: document.getElementById('cart'),
     cartProducts: document.getElementById('template-cart'),
@@ -135,34 +164,7 @@ const DomCart = {
         }
 
         document.getElementById('btn-submit').addEventListener('click', function (event) {
-            //Creating class for sending contact infos
-            class Contact {
-                constructor(firstName, lastName, address, city, email) {
-                    this.firstName  = firstName
-                    this.lastName   = lastName
-                    this.address    = address
-                    this.city       = city
-                    this.email      = email
-                }
-            }
-            //Creating a class to post contact's object and product's array to server
-            class FormSent {
-                constructor(user, products) {
-                    this.contact    = user
-                    this.products   = products
-                }
-            }
-            //Creating a class to easily add product purchased info
-            class Confirm {
-                constructor(param, name, imgUrl, id, quantity, price) {
-                    this.param      = param
-                    this.name       = name
-                    this.imgUrl     = imgUrl
-                    this.id         = id
-                    this.quantity   = quantity
-                    this.price      = price
-                }
-            }
+            
             //Initializing array for products Ordered
             let productsOrdered = []
                     
@@ -173,7 +175,6 @@ const DomCart = {
                 toastBox.innerHTML = 'Formulaire invalide, merci de bien renseigner tous les champs du formulaire !'
                 toastBox.className = "show show--alert"
                 setTimeout(function(){ toastBox.className = toastBox.className.replace("show show--alert", ""); }, 3000)
-                //Dom.toast('Formulaire invalide, merci de bien renseigner tous les champs du formulaire !')
             }
             else {
                 //Form is valid: creating the user contact infos
@@ -195,8 +196,6 @@ const DomCart = {
                 //Initializing an array to get the param used to the POST request and adding it to orderIds
                 let paramOrder = []
 
-                //JSON.parse(productsOrdered)
-                //localStorage.setItem('paramOrder', JSON.stringify(paramOrder))
                 for (let i in productsOrdered) {
                     paramOrder.push(i)
                     localStorage.setItem('paramOrder', JSON.stringify(paramOrder))
@@ -225,8 +224,6 @@ const DomCart = {
         else {
             setTimeout(function() { alert('Panier vide !\n\nVous allez être redirigé vers la page d\'accueil'); }, 500)
             setTimeout(function() { window.location.pathname = '/index.html'; }, 600)
-            // setTimeout(function(){ toastBox.className = toastBox.className.replace("show", ""); }, 3000)
-            // setTimeout(function(){ window.location.href = '../../index.html'; }, 5000)
             
         }
     }

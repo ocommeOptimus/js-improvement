@@ -25,6 +25,8 @@ const DomOrder = {
 
         DomOrder.order.appendChild(orderTemplate)
 
+        DomCart.buildOrderList()
+
     },
     buildOrderList: function () {
         let orderConfirmation                = JSON.parse(localStorage.getItem('confirm'))
@@ -56,4 +58,4 @@ const DomOrder = {
         orderTotal.innerHTML = 'Prix de votre commande : ' + (new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(finalPriceOrder/100))
     }
 }
-window.onload = DomOrder.buildOrderText(), DomOrder.buildOrderList()
+window.onload = DomOrder.buildOrderText()

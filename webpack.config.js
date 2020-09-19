@@ -7,11 +7,12 @@ module.exports = {
     main: "./main.js",
     product: "./assets/js/product.js",
     cart: "./assets/js/cart.js",
-    order: "./assets/js/order.js"
+    order: "./assets/js/order.js",
+    api: "./data/productsDataSource.js"
   },
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve('./assets', "dist")
+    path: path.resolve(__dirname, "dist")
   },
   module: {
     rules: [
